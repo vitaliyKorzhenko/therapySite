@@ -23,6 +23,6 @@
     },
     "installCommand": "yarn install",
     "buildCommand": "yarn build",
-    "outputDirectory": "public"
+    "outputDirectory": "dist"
   }
   

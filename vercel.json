@@ -1,0 +1,28 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ],
+    "env": {
+      "NODE_ENV": "production",
+      "YARN_VERSION": "latest"
+    },
+    "build": {
+      "env": {
+        "YARN_VERSION": "latest"
+      }
+    },
+    "installCommand": "yarn install",
+    "buildCommand": "yarn build",
+    "outputDirectory": "public"
+  }
+  

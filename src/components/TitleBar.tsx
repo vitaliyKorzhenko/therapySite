@@ -19,7 +19,7 @@ const Title: React.FC = () => {
 
     return (
         <Typography variant="h6" className={classes.title}>
-            Кушніренко Ганна Василівна - Лікар-психіатр
+            Кушніренко Ганна Василівна,лікар-психіатр
         </Typography>
     );
 };

@@ -39,7 +39,8 @@ const useStyles = makeStyles({
         fontSize: '20px',
         fontWeight: 'bold',
         paddingBottom: '5px',
-
+        textAlign: 'left', /* Выравнивание текста по левому краю */
+        overflowWrap: 'break-word'
     },
     answer: {
         marginBottom: '5px', // Уменьшен отступ
@@ -131,9 +132,13 @@ const TestPage: React.FC = () => {
             {testData?.questions.map(question => (
                 <Card key={question.id} className={classes.questionCard}>
                     <CardContent>
+                        { question.header && question.header.length > 0 ?
+                    
                         <Typography className={classes.answerHeader}>
                             <span className={classes.highlight}>{question.number}.{' '}</span>{question.header}
                         </Typography>
+                        : null
+                        }
                         <FormControl component="fieldset" className={classes.formControl}>
                             <RadioGroup
                                 value={answers[question.id] || ''}

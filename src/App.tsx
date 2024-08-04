@@ -16,7 +16,7 @@ const App: React.FC = () => {
             <Routes>
                     <Route path="/" element={
                     <>
-                    <InfoCardComponent />
+                    {/* <InfoCardComponent /> */}
                     <div className="centeredText">
                 <Typography variant="h6" component="div" style={{ fontWeight: 'bold' }}>
                     Тестування на виявлення можливих ментальних порушень

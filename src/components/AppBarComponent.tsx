@@ -4,7 +4,8 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
-import { Link } from '@mui/material';
+import { IconButton, Link } from '@mui/material';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 const useStyles = makeStyles({
     appBar: {
@@ -25,6 +26,10 @@ const useStyles = makeStyles({
             textDecoration: 'underline',
         },
     },
+    icon: {
+        marginLeft: 10,
+        color: 'red', // Красный цвет иконок
+    }
 });
 
 const AppBarComponent: React.FC = () => {
@@ -34,8 +39,20 @@ const AppBarComponent: React.FC = () => {
         <AppBar position="static" className={classes.appBar} elevation={0}>
             <Toolbar>
                 <Typography variant="h6" className={classes.title}>
-                   Кушніренко Ганна
+                   Кушніренко Ганна - Лікар-психіатр
                 </Typography>
+                    <Typography component="span">
+                        dr_kushnirenko_hanna
+                    </Typography>
+                    <IconButton
+                        className={classes.icon}
+                        color="inherit"
+                        href="https://www.instagram.com/dr_kushnirenko.hanna?igsh=MWwwdDAzOTN3MzZkcw=="
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        <InstagramIcon style={{color:'red'}} />
+                    </IconButton>
                 <Link href="/" className={classes.link}
                 >
                     Головна

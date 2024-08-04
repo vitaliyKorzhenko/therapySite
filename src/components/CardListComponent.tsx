@@ -74,7 +74,27 @@ const cardData: CardItem[] = [
         icon: 'psychology',
         borderColor: '#32CD32', // Пример цвета рамки
     },
-    // Добавьте другие карточки по аналогии
+    {
+        id: 4,
+        title: 'Опитувальник для виявлення ПА',
+        description: '',
+        icon: 'psychology',
+        borderColor: '#FFD700', // Пример цвета рамки
+    },
+    {
+        id: 5,
+        title: 'Тест на симптоми РДУГ',
+        description: '',
+        icon: 'psychology',
+        borderColor: '#FF69B4', // Пример цвета рамки
+    },
+    {
+        id: 6,
+        title: 'Шкала Єля-Брауна для оцінки симптомів ОКР',
+        description: '',
+        icon: 'psychology',
+        borderColor: '#9370DB', // Пример цвета рамки
+    }
 ];
 
 const CardListComponent: React.FC = () => {
@@ -102,9 +122,9 @@ const CardListComponent: React.FC = () => {
                             </Typography>
                         </div>
                         <Divider className={classes.divider} />
-                        <Typography className={classes.content}>
+                        {/* <Typography className={classes.content}>
                             {card.description}
-                        </Typography>
+                        </Typography> */}
                     </CardContent>
                 </Card>
             ))}

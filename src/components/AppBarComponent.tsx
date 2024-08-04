@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import { IconButton, Link } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import Title from './TitleBar';
+import HomeLink from './HomeIcon';
 
 const useStyles = makeStyles({
     appBar: {
@@ -14,8 +16,14 @@ const useStyles = makeStyles({
         padding: '0 20px', // Уменьшаем ширину панели
     },
     title: {
-        flexGrow: 1,
-        textAlign: 'left',
+        fontSize: '24px',               // Размер шрифта
+        fontWeight: 'bold',             // Жирный шрифт
+        color: '#333',                  // Цвет текста
+        textAlign: 'center',            // Выравнивание по центру
+        marginBottom: '16px',           // Отступ снизу
+        fontFamily: '"Roboto", sans-serif', // Используемый шрифт
+        textTransform: 'uppercase',     // Приведение текста к верхнему регистру
+        letterSpacing: '0.5px',         // Межбуквенное расстояние
     },
     link: {
         margin: '0 10px',
@@ -38,28 +46,12 @@ const AppBarComponent: React.FC = () => {
     return (
         <AppBar position="static" className={classes.appBar} elevation={0}>
             <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                   Кушніренко Ганна - Лікар-психіатр
-                </Typography>
-                    <Typography component="span">
-                        dr_kushnirenko_hanna
-                    </Typography>
-                    <IconButton
-                        className={classes.icon}
-                        color="inherit"
-                        href="https://www.instagram.com/dr_kushnirenko.hanna?igsh=MWwwdDAzOTN3MzZkcw=="
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        <InstagramIcon style={{color:'red'}} />
-                    </IconButton>
-                <Link href="/" className={classes.link}
+                <HomeLink/>
+              <Title />
+                {/* <Link href="/" className={classes.link}
                 >
                     Головна
-                </Link>
-                <Link href="#" className={classes.link}>
-                    Про Лікаря
-                </Link>
+                </Link> */}
             </Toolbar>
         </AppBar>
     );

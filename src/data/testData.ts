@@ -1,7 +1,7 @@
-import { TestInfo } from "../components/TestPage";
+import { Question, QuestionOld, TestInfo, TestInfoOld } from "../components/TestPage";
 
 // src/data/depressionTestData.ts
-export const depressionTestData: TestInfo[] = [
+export const depressionTestDataOld: TestInfoOld[] = [
     {
         id: 1,
         header: "Опитувальник з генералізованої тривоги - GAD-7",
@@ -86,6 +86,7 @@ export const depressionTestData: TestInfo[] = [
             }
 
         ],
+        resultInfo: 'Важливо зазначити, що тест GAD-7 не є остаточною діагнозом і не може замінити професійну консультацію з лікарем-психіатром. Якщо ви маєте симптоми депресії, зверніться до свого лікаря або психотерапевта для отримання професійної допомоги.'
     },
     {
         id: 2,
@@ -1561,6 +1562,63 @@ export const depressionTestData: TestInfo[] = [
     
     
 ]
+
+
+//parse TestInfoOld -> TestInfo
+
+export const allTestData = (): TestInfo[] => {
+    const testInfoOld: TestInfoOld[] = depressionTestDataOld;
+    let testInfo: TestInfo[] = [];
+    testInfoOld.forEach((el: TestInfoOld) => {
+        let questions: Question[] = [];
+        let newEl: TestInfo = {
+            id: el.id,
+            header: el.header,
+            instruction: el.instruction,
+            questions: [],
+            resultInfo: el.resultInfo ? el.resultInfo : ''
+        };
+        //parse questions
+        el.questions.forEach((q: QuestionOld) => {
+            let newQ: Question = {
+                id: q.id,
+                number: q.number,
+                header: q.header,
+                options: []
+            };
+            //parse options
+            q.options.forEach((opt: string, index: number) => {
+                newQ.options.push({text: opt, point: index});
+            });
+            questions.push(newQ);
+        });
+        newEl.questions = questions;
+        testInfo.push(newEl);
+        
+    });
+    console.log('testInfo', testInfo);
+    return testInfo;
+};
+
+
+export const analyseScore = (testId: number, score: number): string => {
+    if (testId === 1) {
+//         0-4 — мінімальна тривога
+// 5-9 — легка тривога
+// 10-14 — помірне занепокоєння
+// 15-21 — сильна тривога
+        if (score <= 4) {
+            return 'Мінімальна тривога';
+        } else if (score <= 9) {
+            return 'Легка тривога';
+        } else if (score <= 14) {
+            return 'Помірне занепокоєння';
+        } else if (score <= 21) {
+            return 'Сильна тривога';
+        }
+    }
+    return '';
+}
 
 
 

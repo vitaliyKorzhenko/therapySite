@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Typography, Card, CardContent, Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import { depressionTestData } from '../data/testData';
+import { allTestData, analyseScore } from '../data/testData';
+import Result from './ResultScoreComponent'; // Импортируем компонент Result
 
 const useStyles = makeStyles({
     container: {
@@ -79,9 +80,15 @@ const useStyles = makeStyles({
 });
 
 
+export interface QuestionOption {
+    text: string
+    point?: number
+}
+
+
 export interface Question {
     id: number;
-    options: string[];
+    options: QuestionOption[];
     number: number;
     header: string;
 }
@@ -90,26 +97,70 @@ export interface TestInfo {
     header: string;
     questions: Question[];
     instruction: string;
+    resultInfo?:  string;
 }
 
+
+export interface QuestionOld {
+    id: number;
+    options: string[];
+    number: number;
+    header: string;
+}
+
+export interface TestInfoOld {
+    id: number;
+    header: string;
+    questions: QuestionOld[];
+    instruction: string;
+    resultInfo?:  string;
+}
 
 
 
 const TestPage: React.FC = () => {
     const classes = useStyles();
     const { id } = useParams();
-    const [answers, setAnswers] = useState<Record<number, string>>({});
+    const [answers, setAnswers] = useState<Record<number, QuestionOption>>({});
 
-    const handleAnswerChange = (questionId: number, answer: string) => {
-        setAnswers(prevAnswers => ({ ...prevAnswers, [questionId]: answer }));
-    };
 
-    const testData: TestInfo | undefined = depressionTestData.find(test => test.id == Number(id));
+    const [showResult, setShowResult] = useState(false);
+
+    const [resultText, setResultText] = useState('');
+
+    const [currentScore, setCurrentScore] = useState(0);
+
+
+    const testData: TestInfo | undefined = allTestData().find(test => test.id == Number(id));
+    const handleAnswerChange = (questionId: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedText = event.target.value;
+        const questions = testData ? testData.questions.find(question => question.id == questionId): null;
+        const selectedOption = questions ? questions.options.find(option => option.text === selectedText): null;
+    
+        setAnswers(prevAnswers => ({
+            ...prevAnswers,
+            [questionId]: {
+                text: selectedText,
+                point: selectedOption?.point
+            }
+        }));
+    }
 
     const handleSubmit = () => {
         // Обработка отправки данных теста
-        console.log('Ответы:', answers);
-    };
+        let score = 0;
+        for (let key in answers) {
+            if (answers[key]&& answers[key].point !== undefined) {
+                score += answers[key]?.point ?? 0;
+            }
+        }
+        let testId = testData ? testData.id : 0;
+        let result = analyseScore(testId, score);
+        setResultText(result);
+        setCurrentScore(score);
+        setShowResult(true);
+
+}
     if (!testData) {
         return (
             <>
@@ -141,15 +192,15 @@ const TestPage: React.FC = () => {
                         }
                         <FormControl component="fieldset" className={classes.formControl}>
                             <RadioGroup
-                                value={answers[question.id] || ''}
-                                onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                                value={answers[question.id]?.text || ''}
+                                onChange={handleAnswerChange(question.id)}
                             >
                                 {question.options.map(option => (
                                     <FormControlLabel
-                                        key={option}
-                                        value={option}
+                                        key={option.text}
+                                        value={option.text}
                                         control={<Radio />}
-                                        label={option}
+                                        label={option.text}
                                         className={classes.answer}
                                     />
                                 ))}
@@ -165,6 +216,13 @@ const TestPage: React.FC = () => {
             >
                 ОБРОБИТИ
             </Button>
+            {showResult && (
+            <Result
+                score={currentScore}
+                anxietyMessage={resultText}
+                note= {testData.resultInfo ? testData.resultInfo : ''}
+            />
+        )}
         </div>
     );
 };

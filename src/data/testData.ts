@@ -1038,7 +1038,8 @@ export const depressionTestDataOld: TestInfoOld[] = [
                     "Ні"
                 ]
             }
-        ]
+        ],
+        resultInfo: 'Важливо зауважити, що цей тест не є остаточним діагнозом і не може замінити професійну консультацію з лікарем-психіатром. Якщо у вас є підозра на панічні атаки, рекомендується звернутися до фахівця для отримання правильної діагностики та лікування.'
     },
     {
         id: 5,
@@ -1590,7 +1591,15 @@ export const allTestData = (): TestInfo[] => {
             };
             //parse options
             q.options.forEach((opt: string, index: number) => {
-                newQ.options.push({text: opt, point: index});
+                if (el.id == 4) {
+                    if (opt == 'Так')
+                        newQ.options.push({text: opt, point: 1});
+                    else
+                        newQ.options.push({text: opt, point: 0});
+
+                } else {
+                    newQ.options.push({text: opt, point: index});
+                }
             });
             questions.push(newQ);
         });
@@ -1656,6 +1665,20 @@ export const analyseScore = (testId: number, score: number): string => {
             return 'Тяжкий ступінь вираженості симптомів ОКР';
         } else if (score <= 40) {
             return 'Дуже тяжкий ступінь вираженості симптомів ОКР';
+        }
+    }
+
+    if (testId == 4) {
+        //0-3 низький ризик 
+        //4-7 середній ризик 
+        //8-11 високий ризик
+
+        if (score <= 3) {
+            return 'Низький ризик';
+        } else if (score <= 7) {
+            return 'Середній ризик';
+        } else if (score <= 11) {
+            return 'Високий ризик';
         }
     }
     return '';

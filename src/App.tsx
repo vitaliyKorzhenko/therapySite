@@ -20,7 +20,7 @@ const App: React.FC = () => {
                     <>
                     {/* <InfoCardComponent /> */}
                     <div className="centeredText">
-                <Typography variant="h6" component="div" style={{ fontWeight: 'bold', textAlign: 'left' }}>
+                <Typography variant="h6" component="div" style={{textAlign: 'left', fontSize: '14px' }}>
                     Тестування на виявлення можливих ментальних порушень
                 </Typography>
             </div>

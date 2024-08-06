@@ -1,27 +1,31 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-// Стили для компонента
 const useStyles = makeStyles({
-    title: {
-        fontSize: '24px',
-        fontWeight: 'bold',
-        color: '#333',
-        textAlign: 'center',
-        marginBottom: '20px',
-        fontFamily: '"Roboto", sans-serif', // Вы можете выбрать другой шрифт
-      },
+  boldText: {
+    fontWeight: 'bold',
+    textAlign: 'left',
+    fontSize: '20px'
+  },
+  mainText: {
+    textAlign: 'left',
+    fontSize: '16px'
+  }
 });
 
 const Title: React.FC = () => {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <Typography variant="h6" className={classes.title}>
-            Кушніренко Ганна Василівна,лікар-психіатр
-        </Typography>
-    );
+  return (
+    <Typography  className={classes.mainText}>
+       <span className={classes.boldText}>
+        Кушніренко Ганна Василівна
+        </span>
+      <br />
+      <span className={classes.boldText}>лікар-психіатр</span>
+    </Typography>
+  );
 };
 
 export default Title;

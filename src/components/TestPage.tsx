@@ -52,7 +52,7 @@ const useStyles = makeStyles({
         margin: '20px 0',
     },
     highlight: {
-        color: '#2196f3', // Blue color for "Обробити"
+        color: '#006400',
         fontWeight: 'bold',
     },
     formControl: {
@@ -63,20 +63,24 @@ const useStyles = makeStyles({
     },
     submitButton: {
         marginTop: '20px',
-        width: '50%', // Ширина кнопки
-        marginLeft: 'auto', // Выравнивание влево
+        width: '50%', // Width of the button
+        marginLeft: 'auto', // Align left
+        marginRight: '0', // Align right
         height: '50px',
-        marginRight: '0', // Выравнивание вправо
-        backgroundColor: 'transparent', // Полая кнопка
-        color: '#2196f3', // Зеленый цвет текста
-        border: '2px solid #2196f3', // Зеленая рамка
+        backgroundColor: '#006400!important', // Bright green background color
+        color: '#FFFFFF!important', // White text color
+        border: '2px solid #006400!important', // Green border
+        borderRadius: '25px', // Rounded corners for a more elegant look
+        fontWeight: 'bold', // Bold text
+        fontSize: '16px', // Larger font size for better readability
+        transition: 'all 0.3s ease', // Smooth transition for hover effect
         '&:hover': {
-            backgroundColor: 'transparent', // Полая кнопка при наведении
-            border: '2px solid #2196f3', // Более темная рамка при наведении
-            color: '#2196f3', // Темно-зеленый цвет текста при наведении
+          backgroundColor: '#00CC00', // Darker green background color on hover
+          borderColor: '#00CC00', // Darker green border on hover
+          color: '#FFFFFF', // Ensure text remains white on hover
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Add shadow on hover for depth
         },
-        
-    },
+    }
 });
 
 

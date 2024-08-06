@@ -12,10 +12,11 @@ const useStyles = makeStyles({
         marginTop: '16px',
     },
     link: {
-        color: '#1E90FF', // Цвет ссылки
+        color: '#006400!important', // Цвет ссылки
         textDecoration: 'none',
         fontWeight: 'bold',
         marginRight: '8px',
+        fontSize: '20px',
     },
     icon: {
         color: 'red',
